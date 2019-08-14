@@ -36,4 +36,37 @@ class MaxBinaryHeap {
       indexEl = heapArr[index];
     }
   }
+  extractMax() {
+    let heapArr = this.heap;
+    let temp = heapArr[0];
+    heapArr[0] = heapArr[heapArr.length - 1];
+    heapArr[heapArr.length - 1] = temp;
+    let max = heapArr.pop();
+    this.bubbleDown();
+    return max;
+  }
+  bubbleDown() {
+    let index = 0;
+    let heapArr = this.heap;
+    let left = index * 2 + 1;
+    let right = index * 2 + 2;
+    let parentEl = heapArr[index];
+    let leftEl = heapArr[left];
+    let rightEl = heapArr[right];
+    let maxIdx = leftEl < rightEl ? right : left;
+    let maxEl = leftEl < rightEl ? rightEl : leftEl;
+    while (maxEl > parentEl) {
+      let temp = parentEl;
+      heapArr[index] = maxEl;
+      heapArr[maxIdx] = temp;
+      index = maxIdx;
+      left = index * 2 + 1;
+      right = index * 2 + 2;
+      parentEl = heapArr[index];
+      leftEl = heapArr[left];
+      rightEl = heapArr[right];
+      maxIdx = leftEl < rightEl ? right : left;
+      maxEl = leftEl < rightEl ? rightEl : leftEl;
+    }
+  }
 }
