@@ -23,3 +23,7 @@ var swap = function(arr, firstIdx, secondIdx) {
 //I used a helper function that swaps the values of two indices in an array.
 //The first array will iterate through half of the array and use the helper
 //function to swap with the other corresponding index.
+
+//Space complexity is O(1) since we are doing in place. Time complexity is O(n).
+//Even though we only complete n/2 operations, we drop the constant 1/2 in this
+//case.
