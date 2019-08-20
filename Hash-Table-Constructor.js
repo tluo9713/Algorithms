@@ -1,6 +1,8 @@
 //Created a hash table from scratch. There are certain limitations and
 //weaknesses of this hashtable. For one thing, this hash table will insert
 //any key, even if it already exists, and will not overwrite previous values.
+//Insertion is also not constant time. It's dependent on length of key. There
+//is not a delete function yet.
 
 class HashTable {
   constructor(size = 53) {
