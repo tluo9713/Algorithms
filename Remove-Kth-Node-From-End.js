@@ -13,6 +13,8 @@
 // remove the node. On AlgoExpert there was an extra level of difficulty in that
 //they didn't explicitly tell you that you need to remove the node in place and
 //not return anything.
+//There is also and alternative solution to use recursion, but that's not
+//faster as well as will take up more space.
 
 function removeKthNodeFromEnd(head, k) {
   let firstPointer = head;
