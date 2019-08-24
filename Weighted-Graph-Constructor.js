@@ -1,3 +1,5 @@
+import PriorityQueue from './Priority-Queue-Constructor';
+
 class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
@@ -9,5 +11,15 @@ class WeightedGraph {
   addEdge(vertex1, vertex2, weight) {
     this.adjacencyList[vertex1].push({ node: vertex2, weight });
     this.adjacencyList[vertex2].push({ node: vertex1, weight });
+  }
+  DijkstraAlgo(start, end) {
+    let distances = {};
+    this.adjacencyList.forEach(node => {
+      if (distances[node] === start) {
+        distances[node] = 0;
+      } else {
+        distances[node] = Infinity;
+      }
+    });
   }
 }
