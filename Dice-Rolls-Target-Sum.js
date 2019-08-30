@@ -29,5 +29,8 @@ var numRollsToTarget = function(d, f, target) {
       }
     }
   }
+  console.log(memo);
   return memo[d - 1][target];
 };
+
+numRollsToTarget(5, 6, 70);
