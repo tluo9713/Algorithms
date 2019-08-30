@@ -13,6 +13,7 @@
 //as we have to store every node we seen. There is a slightly more optimized
 //solution for space. What if we had two pointers, and one pointer moves at
 //a speed of 2 nodes, while the other pointer moves only one node at a time.
+//This technique is known as the tortoise and the hare.
 //If the fast node ever reaches null, we know this is not a cycle. If there is
 //a cycle, there will be an overlap at some point where both pointers point to
 //the same node. This node isn't always guarenteed to be the start of the cycle.
