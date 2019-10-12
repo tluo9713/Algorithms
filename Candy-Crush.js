@@ -31,10 +31,10 @@ var candyCrush = function(board) {
 
   while (runCrushFunction) {
     //create a mask
-    let mask = new Array(board.length);
-    for (let i = 0; i < mask.length; i++) {
-      mask[i] = new Array(board[i].length).fill(false);
-    }
+    // let mask = new Array(board.length);
+    // for (let i = 0; i < mask.length; i++) {
+    //   mask[i] = new Array(board[i].length).fill(false);
+    // }
     let crushMatrix = new Array(board.length);
     for (let i = 0; i < crushMatrix.length; i++) {
       crushMatrix[i] = new Array(board[i].length).fill(false);
