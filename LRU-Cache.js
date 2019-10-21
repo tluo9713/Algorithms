@@ -122,5 +122,93 @@ class LRUCache {
   }
 }
 
-// Do not edit the line below.
-exports.LRUCache = LRUCache;
+//LeetCode variation
+var LRUCache = function(capacity) {
+  this.maxSize = capacity || 1;
+  this.length = 0;
+  this.DLL = new DLL(this.capacity);
+  this.cache = {};
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if (this.cache[key]) {
+    let node = this.cache[key];
+    node.value = value;
+    this.DLL.moveToHead(node);
+  } else {
+    if (this.length === this.maxSize) {
+      let deletedKey = this.DLL.removeFromTail();
+      delete this.cache[deletedKey];
+      this.length--;
+    }
+    let newNode = new Node(key, value);
+    this.cache[key] = newNode;
+    this.DLL.addToHead(newNode);
+    this.length++;
+  }
+};
+
+LRUCache.prototype.get = function(key) {
+  if (this.cache[key]) {
+    let node = this.cache[key];
+    this.DLL.moveToHead(node);
+    return node.value;
+  }
+  return -1;
+};
+
+var Node = function(key, value) {
+  this.key = key;
+  this.value = value;
+  this.prev = this.next = null;
+};
+
+var DLL = function(size) {
+  this.limit = size;
+  this.length = 0;
+  this.head = this.tail = null;
+};
+
+DLL.prototype.addToHead = function(node) {
+  if (this.head === null) {
+    this.head = this.tail = node;
+  } else {
+    this.head.prev = node;
+    node.next = this.head;
+    this.head = node;
+  }
+};
+
+DLL.prototype.moveToHead = function(node) {
+  if (this.head !== node) {
+    let prev = node.prev;
+    let next = node.next;
+    node.prev = null;
+    node.next = this.head;
+    this.head.prev = node;
+    this.head = node;
+    if (prev) {
+      prev.next = next;
+      if (this.tail === node) {
+        this.tail = prev;
+      }
+    }
+    if (next) {
+      next.prev = prev;
+    }
+  }
+};
+
+DLL.prototype.removeFromTail = function() {
+  const key = this.tail.key;
+  if (this.tail === this.head) {
+    this.tail = this.head = null;
+  } else {
+    const { prev } = this.tail;
+    prev.next = null;
+    this.tail.prev = null;
+    this.tail = prev;
+  }
+
+  return key;
+};
