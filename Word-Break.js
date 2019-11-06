@@ -67,7 +67,8 @@ var wordBreak = function(s, wordDict) {
 };
 
 //For a leetcode efficient answer, don't build your string by adding the letters
-//one by one, just use the built in substring method
+//one by one, just use the built in substring method. Time complexity still at
+//O(n^2), space complexity still at O(n)
 var wordBreakOptimized = function(s, wordDict) {
   //create a set with all words in wordDict
   let wordSet = new Set(wordDict);
