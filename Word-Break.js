@@ -65,3 +65,23 @@ var wordBreak = function(s, wordDict) {
 
   return memo[memo.length - 1];
 };
+
+//For a leetcode efficient answer, don't build your string by adding the letters
+//one by one, just use the built in substring method
+var wordBreakOptimized = function(s, wordDict) {
+  //create a set with all words in wordDict
+  let wordSet = new Set(wordDict);
+
+  //create a sxs matrix represeting if we can create a word from col
+  //index to row index.
+  let memo = new Array(s.length).fill(false);
+
+  for (let i = 0; i < memo.length; i++) {
+    for (let j = i; j < memo.length; j++) {
+      let currWord = s.substring(i, j + 1);
+      if (wordSet.has(currWord) && (i === 0 || memo[i - 1])) memo[j] = true;
+    }
+  }
+
+  return memo[memo.length - 1];
+};
