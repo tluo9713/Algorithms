@@ -13,6 +13,8 @@
  * @return {boolean}
  */
 
+//Time complexity O(n^2) and because of the matrix we make, O(n^2) space
+//complexity.
 var wordBreakFirst = function(s, wordDict) {
   //create a set with all words in wordDict
   let wordSet = new Set(wordDict);
@@ -39,5 +41,27 @@ var wordBreakFirst = function(s, wordDict) {
       if (matrix[i][j] && memo[i - 1]) memo[j] = true;
     }
   }
+  return memo[memo.length - 1];
+};
+
+//Alternatively, you can combine both steps in the same for loop and use only
+//the memoized array. O(n^2) time complexity, O(n) space complexity
+var wordBreak = function(s, wordDict) {
+  //create a set with all words in wordDict
+  let wordSet = new Set(wordDict);
+
+  //create a sxs matrix represeting if we can create a word from col
+  //index to row index.
+  let memo = new Array(s.length).fill(false);
+
+  for (let i = 0; i < memo.length; i++) {
+    let currWord = '';
+    for (let j = i; j < memo.length; j++) {
+      let letter = s[j];
+      currWord += letter;
+      if (wordSet.has(currWord) && (i === 0 || memo[i - 1])) memo[j] = true;
+    }
+  }
+
   return memo[memo.length - 1];
 };
