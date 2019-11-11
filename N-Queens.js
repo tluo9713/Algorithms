@@ -34,7 +34,7 @@ var solveNQueens = function(n) {
   for (let i = 0; i < n; i++) {
     board.push(new Array(n).fill(0));
   }
-  let totalNumWays = helper(board, n, solutions);
+  helper(board, n, solutions);
   return solutions;
 };
 
