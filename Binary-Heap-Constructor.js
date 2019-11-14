@@ -20,7 +20,7 @@ class MaxBinaryHeap {
   }
   bubbleUp() {
     let index = this.heap.length - 1;
-    let parentIdx = Math.floor(index / 2);
+    let parentIdx = Math.floor(index - 1 / 2);
     let heapArr = this.heap;
     let parentEl = heapArr[parentIdx];
     let indexEl = heapArr[index];

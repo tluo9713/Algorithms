@@ -19,7 +19,8 @@ class Node {
     this.prev = null;
   }
 }
-
+let test = new DoublyLinkedList();
+test.push(7);
 class DoublyLinkedList {
   constructor() {
     this.head = null;
