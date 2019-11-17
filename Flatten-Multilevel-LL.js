@@ -28,6 +28,30 @@
 //traverses to the end of the linked list for us and returns it, we no longer
 //have to traverse multiple times, just once. This makes it an O(n) time
 //complexity and a O(1) space complexity.
+
+var flatten = function(head) {
+  if (!head) return null;
+  let stack = [head];
+  let prev = null;
+  while (stack.length) {
+    let curr = stack.pop();
+    if (prev) {
+      prev.next = curr;
+      curr.prev = prev;
+    }
+    if (curr.next) stack.push(curr.next);
+    if (curr.child) stack.push(curr.child);
+    curr.next = null;
+    curr.child = null;
+    prev = curr;
+  }
+  return head;
+};
+
+//if there is a next, add to stack
+//if there is a child, add to stack IN THIS ORDER
+//while stack exists, keep on popping
+
 var flatten = function(head) {
   let [newHead, _] = helper(head);
   return newHead;
