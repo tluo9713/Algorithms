@@ -23,6 +23,51 @@
 //The secret to solving this is to use a stack. By using a stack with a bit of
 //logic you can keep track of which letters you need to multiply by how much.
 //This will take care of nested bracket statements
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function(s) {
+  let strStack = [];
+  let numStack = [];
+  let currStr = '';
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    if (isNum(char)) {
+      //grabs all the consecutive num chars
+      while (s[i + 1] !== '[') {
+        char += s[i + 1];
+        i++;
+      }
+      numStack.push(Number(char));
+      strStack.push(currStr);
+      currStr = '';
+      i++;
+    } else if (char !== ']') {
+      currStr += char;
+    } else {
+      let num = numStack.pop();
+      currStr = currStr.repeat(num);
+      let recentStr = strStack.pop();
+      currStr = recentStr + currStr;
+    }
+  }
+  return currStr;
+};
+
+var isNum = function(str) {
+  let num = Number(str);
+  return !Number.isNaN(num);
+};
+
+/* keep a num stack and str stack
+examine each char 1 by 1 and start with a curr str = ''
+if num stack is empty and we see a letter, we'll add it to the curr str
+if you see a number, we'll add it to our num stack and if there is a curr str, add it to the str stack assume next letter of interest is 2 chars away
+if you see a close bracket this is when we'll pop off the num stack and multiply the current str by that number amount. then we'll pop off the str stack and add it before curr str
+*/
+
 var decodeString = function(s) {
   const numStack = [];
   const letterStack = [];
