@@ -11,29 +11,21 @@ var spiralOrder = function(matrix) {
   if (matrix.length === 0) return [];
   let limit = matrix.length * matrix[0].length;
   let arr = [];
-  let dr = [0, 1, 0, -1];
-  let dc = [1, 0, -1, 0];
-  let unvisited = [];
-  for (let i = 0; i < matrix.length; i++) {
-    unvisited.push(new Array(matrix[0].length).fill(true));
-  }
-  let pr = 0;
-  let pc = 0;
+  let dRow = [0, 1, 0, -1];
+  let dCol = [1, 0, -1, 0];
+  let unvisited = matrix.map(row => new Array(row.length).fill(true));
+  let currRow = 0;
+  let currCol = -1;
   let direction = 0;
-  arr.push(matrix[0][0]);
-  unvisited[0][0] = false;
   while (arr.length < limit) {
-    if (
-      matrix[pr + dr[direction]] &&
-      unvisited[pr + dr[direction]][pc + dc[direction]]
-    ) {
-      pr += dr[direction];
-      pc += dc[direction];
-      arr.push(matrix[pr][pc]);
-      unvisited[pr][pc] = false;
-    } else {
-      direction = (direction + 1) % 4;
-    }
+    let nextRow = currRow + dRow[direction];
+    let nextCol = currCol + dCol[direction];
+    if (matrix[nextRow] && unvisited[nextRow][nextCol]) {
+      arr.push(matrix[nextRow][nextCol]);
+      currRow = nextRow;
+      currCol = nextCol;
+      unvisited[currRow][currCol] = false;
+    } else direction = (direction + 1) % 4;
   }
   return arr;
 };
